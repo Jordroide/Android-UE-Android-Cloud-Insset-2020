@@ -2,6 +2,7 @@ package com.jordroid.android_cloud_2020.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jordroid.android_cloud_2020.R
@@ -30,8 +31,11 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         // Create the instance of adapter
         mAdapter = AndroidVersionAdapter(this)
-        // We define the style
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        // The second parameter : 2 means 2 cols. You
+        // The third parameter : RecyclerView.VERTICAL we will scroll vertically,
+        // you can scroll horizontally
+        recyclerView.layoutManager = GridLayoutManager(this, 2,
+            RecyclerView.VERTICAL, false)
 
         // We set the adapter to recycler view
         recyclerView.adapter = mAdapter
