@@ -19,6 +19,8 @@ class AndroidVersionAdapter(private val context : Context) : RecyclerView.Adapte
     private val mAndroidListVersion = ArrayList<ObjectDataSample>()
     // Needed to get the item_layout
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
+    // Callback instance
+    private val mCallback = context as OnClickCallback
 
     /**
      * Manage lifecycle
@@ -58,5 +60,14 @@ class AndroidVersionAdapter(private val context : Context) : RecyclerView.Adapte
     inner class AndroidVersionViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val itemRecyclerViewVersionName: TextView = itemView.findViewById(R.id.itemRecyclerViewVersionName)
         val itemRecyclerViewVersionCode: TextView = itemView.findViewById(R.id.itemRecyclerViewVersionCode)
+
+        init {
+            this.itemView.setOnClickListener { itemClicked() }
+        }
+
+        private fun itemClicked() {
+            mCallback.onItemClick(
+                this@AndroidVersionAdapter.mAndroidListVersion[adapterPosition])
+        }
     }
 }

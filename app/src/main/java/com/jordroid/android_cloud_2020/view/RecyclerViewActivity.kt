@@ -1,5 +1,6 @@
 package com.jordroid.android_cloud_2020.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,7 +9,7 @@ import com.jordroid.android_cloud_2020.R
 import com.jordroid.android_cloud_2020.model.ObjectDataSample
 import kotlinx.android.synthetic.main.activity_recycler_view.*
 
-class RecyclerViewActivity : AppCompatActivity() {
+class RecyclerViewActivity : AppCompatActivity(), OnClickCallback {
 
     /**
      * Attribute
@@ -38,6 +39,15 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         // Generate data and give it to adapter
         mAdapter.rebuild(generateFakeData())
+    }
+
+    override fun onItemClick(objectDataSampleClicked: ObjectDataSample) {
+        startActivity(Intent(this, DetailItemRecycler::class.java).also {
+            it.putExtras(Bundle().apply {
+                putString("versionName", objectDataSampleClicked.versionName)
+                putInt("versionCode", objectDataSampleClicked.versionCode)
+            })
+        })
     }
 
     /**
