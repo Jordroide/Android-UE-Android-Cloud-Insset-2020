@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jordroid.android_cloud_2020.R
 import com.jordroid.android_cloud_2020.model.ObjectDataSample
 
-class AndroidVersionAdapter(private val context : Context) : RecyclerView.Adapter<AndroidVersionAdapter.AndroidVersionViewHolder>() {
+class AndroidVersionAdapter(private val context: Context) :
+    RecyclerView.Adapter<AndroidVersionAdapter.AndroidVersionViewHolder>() {
 
     /**
      * Attribute
@@ -19,6 +21,7 @@ class AndroidVersionAdapter(private val context : Context) : RecyclerView.Adapte
 
     // Create list of data we want to display in list as var of class
     private val mAndroidListVersion = ArrayList<ObjectDataSample>()
+
     // Needed to get the item_layout
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -28,10 +31,16 @@ class AndroidVersionAdapter(private val context : Context) : RecyclerView.Adapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AndroidVersionViewHolder {
         // This line perform the matching with our ViewHolder and the item from layout
-        return AndroidVersionViewHolder(mInflater.inflate(R.layout.item_custom_recycler, parent, false))
+        return AndroidVersionViewHolder(
+            mInflater.inflate(
+                R.layout.item_custom_recycler,
+                parent,
+                false
+            )
+        )
     }
 
-    override fun getItemCount(): Int  = mAndroidListVersion.size
+    override fun getItemCount(): Int = mAndroidListVersion.size
 
     override fun onBindViewHolder(holder: AndroidVersionViewHolder, position: Int) {
         // onBindViewHolder is called for each item we want to display so we need to get each object
@@ -50,21 +59,23 @@ class AndroidVersionAdapter(private val context : Context) : RecyclerView.Adapte
      * Public method (Called from activity)
      */
 
-    fun rebuild(androidListVersion : ArrayList<ObjectDataSample>) {
-        // This is the simplest way to update the list
+    fun rebuild(androidListVersion: ArrayList<ObjectDataSample>) {
+        val diffUtil = DiffUtil.calculateDiff(AndroidVersionDiffUtil(androidListVersion, this.mAndroidListVersion))
         mAndroidListVersion.clear()
         mAndroidListVersion.addAll(androidListVersion)
-        // Needed to said to recycler view we have new data
-        this.notifyDataSetChanged()
+        diffUtil.dispatchUpdatesTo(this)
     }
 
     /**
      * Internal class
      */
 
-    inner class AndroidVersionViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val itemRecyclerViewVersionName: TextView = itemView.findViewById(R.id.itemRecyclerViewVersionName)
-        val itemRecyclerViewVersionCode: TextView = itemView.findViewById(R.id.itemRecyclerViewVersionCode)
-        val itemRecyclerViewVersionImage: ImageView = itemView.findViewById(R.id.itemRecyclerViewVersionImage)
+    inner class AndroidVersionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemRecyclerViewVersionName: TextView =
+            itemView.findViewById(R.id.itemRecyclerViewVersionName)
+        val itemRecyclerViewVersionCode: TextView =
+            itemView.findViewById(R.id.itemRecyclerViewVersionCode)
+        val itemRecyclerViewVersionImage: ImageView =
+            itemView.findViewById(R.id.itemRecyclerViewVersionImage)
     }
 }
