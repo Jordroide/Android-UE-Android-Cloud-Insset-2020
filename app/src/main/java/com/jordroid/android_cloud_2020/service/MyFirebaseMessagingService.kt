@@ -20,7 +20,7 @@ import com.jordroid.android_cloud_2020.view.MainActivity
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
-        const val TAG = "MyFirebaseMessagingService"
+        const val TAG = "MyFirebaseMessagingSrv"
     }
 
     /**
@@ -32,7 +32,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.data);
+            Log.d(TAG, "Message data payload: " + remoteMessage.data)
         }
 
         // Check if message contains a notification payload.
