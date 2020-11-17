@@ -11,7 +11,7 @@ class ChuckNorrisQuoteRepository {
 
     private val mChuckNorrisDao = CustomApplication.instance.mApplicationDatabase.mChuckNorrisDao()
 
-    fun selectAllChuckNorrisQuote() : LiveData<List<ChuckNorrisQuote>> {
+    fun selectAllChuckNorrisQuote(): LiveData<List<ChuckNorrisQuote>> {
         return mChuckNorrisDao.selectAll()
     }
 
