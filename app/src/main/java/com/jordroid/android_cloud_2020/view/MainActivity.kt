@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jordroid.android_cloud_2020.R
 import com.jordroid.android_cloud_2020.firebase.view.FirebaseLoginActivity
+import com.jordroid.android_cloud_2020.sensor.view.SensorActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         mainButtonActivityValuesLand.setOnClickListener { goToValuesLand() }
         mainButtonActivityPermission.setOnClickListener { goToPermission() }
         mainButtonActivityFirebase.setOnClickListener { goToFirebase() }
+        mainButtonActivitySensor.setOnClickListener { goToSensor() }
     }
 
     /**
@@ -56,5 +58,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun goToFirebase() {
         startActivity(Intent(this, FirebaseLoginActivity::class.java))
+    }
+
+    private fun goToSensor() {
+        startActivity(Intent(this, SensorActivity::class.java))
     }
 }

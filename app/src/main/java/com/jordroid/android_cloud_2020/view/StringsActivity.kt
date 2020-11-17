@@ -15,7 +15,8 @@ class StringsActivity : AppCompatActivity() {
         textViewPluralsTwo.text = resources.getQuantityString(R.plurals.found_word, 3)
 
         // Define value for dynamic content in string
-        textViewDynamicString.text = String.format(getString(R.string.dynamic_content), "Serreau", "Jordane", 27);
+        textViewDynamicString.text =
+            String.format(getString(R.string.dynamic_content), "Serreau", "Jordane", 27);
 
         // You can mix dynamic values and plurals / single variable
         textViewDynamicPlurals.text = resources.getQuantityString(R.plurals.dynamic_plurals, 4, 2);
