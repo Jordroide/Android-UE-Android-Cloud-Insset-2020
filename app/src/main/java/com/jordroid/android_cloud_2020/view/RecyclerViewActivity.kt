@@ -11,7 +11,6 @@ import com.jordroid.android_cloud_2020.model.ChuckNorrisQuote
 import com.jordroid.android_cloud_2020.view.adapter.ChuckNorrisQuoteAdapter
 import com.jordroid.android_cloud_2020.viewmodel.ChuckNorrisViewModel
 import kotlinx.android.synthetic.main.activity_recycler_view.*
-import kotlin.collections.ArrayList
 
 class RecyclerViewActivity : AppCompatActivity() {
 
@@ -35,6 +34,10 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         buttonAddItem.setOnClickListener { addRandomAndroidVersion() }
         buttonDeleteItem.setOnClickListener { deleteAndroidVersion() }
+
+        recycler_refresh.setOnRefreshListener {
+            addRandomAndroidVersion()
+        }
     }
 
     override fun onStart() {
@@ -49,6 +52,7 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     private fun updateRecyclerView(newList: ArrayList<ChuckNorrisQuote>) {
         mAdapter.rebuild(newList)
+        recycler_refresh.isRefreshing = false
     }
 
     private fun addRandomAndroidVersion() {
